@@ -1,0 +1,83 @@
+#include <iostream>
+#include <cstring>
+#include <cctype>
+#include <cstdlib>
+
+int mystrcmp(const char* str1, const char* str2) {
+    return strcmp(str1, str2);
+}
+
+int StringToNumber(const char* str) {
+    return atoi(str);
+}
+
+char* NumberToString(int number) {
+    char buffer[20];
+    sprintf(buffer, "%d", number);
+    char* str = new char[strlen(buffer) + 1];
+    strcpy(str, buffer);
+    return str;
+}
+
+char* Uppercase(const char* str) {
+    int length = strlen(str);
+    char* result = new char[length + 1];
+    for (int i = 0; i < length; i++) {
+        result[i] = toupper(str[i]);
+    }
+    result[length] = '\0';
+    return result;
+}
+
+char* Lowercase(const char* str) {
+    int length = strlen(str);
+    char* result = new char[length + 1];
+    for (int i = 0; i < length; i++) {
+        result[i] = tolower(str[i]);
+    }
+    result[length] = '\0';
+    return result;
+}
+
+char* mystrrev(const char* str) {
+    int length = strlen(str);
+    char* reversed = new char[length + 1];
+    for (int i = 0; i < length; i++) {
+        reversed[i] = str[length - i - 1];
+    }
+    reversed[length] = '\0';
+    return reversed;
+}
+
+int main() {
+    const char* str1 = "Hello";
+    const char* str2 = "World";
+
+    int result = mystrcmp(str1, str2);
+    std::cout << "mystrcmp result: " << result << std::endl;
+
+    const char* numStr = "12345";
+    int num = StringToNumber(numStr);
+    std::cout << "StringToNumber result: " << num << std::endl;
+
+    int number = 98765;
+    char* str = NumberToString(number);
+    std::cout << "NumberToString result: " << str << std::endl;
+    delete[] str;
+
+    const char* input = "AbCdEfG";
+    char* uppercaseStr = Uppercase(input);
+    std::cout << "Uppercase result: " << uppercaseStr << std::endl;
+    delete[] uppercaseStr;
+
+    char* lowercaseStr = Lowercase(input);
+    std::cout << "Lowercase result: " << lowercaseStr << std::endl;
+    delete[] lowercaseStr;
+
+    const char* originalStr = "Hello World";
+    char* reversedStr = mystrrev(originalStr);
+    std::cout << "mystrrev result: " << reversedStr << std::endl;
+    delete[] reversedStr;
+
+    return 0;
+}
