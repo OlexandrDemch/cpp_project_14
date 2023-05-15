@@ -1,0 +1,98 @@
+#include <iostream>
+
+int mystrlen(const char* str) {
+    int length = 0;
+    while (*str != '\0') {
+        length++;
+        str++;
+    }
+    return length;
+}
+
+char* mystrcpy(char* str1, const char* str2) {
+    char* originalStr1 = str1;
+    while (*str2 != '\0') {
+        *str1 = *str2;
+        str1++;
+        str2++;
+    }
+    *str1 = '\0'; 
+    return originalStr1;
+}
+
+char* mystrcat(char* str1, const char* str2) {
+    char* originalStr1 = str1;
+    while (*str1 != '\0') {
+        str1++;
+    }
+    while (*str2 != '\0') {
+        *str1 = *str2;
+        str1++;
+        str2++;
+    }
+    *str1 = '\0';
+    return originalStr1;
+}
+
+char* mystrchr(char* str, char s) {
+    while (*str != '\0') {
+        if (*str == s) {
+            return str;
+        }
+        str++;
+    }
+    return nullptr; 
+}
+
+char* mystrstr(char* str1, char* str2) {
+    while (*str1 != '\0') {
+        char* tempStr1 = str1;
+        char* tempStr2 = str2;
+        while (*tempStr2 != '\0' && *tempStr1 == *tempStr2) {
+            tempStr1++;
+            tempStr2++;
+        }
+        if (*tempStr2 == '\0') {
+            return str1; 
+        }
+        str1++;
+    }
+    return nullptr; 
+}
+
+int main() {
+    const char* str1 = "Hello";
+    const char* str2 = "World";
+    char buffer[20];
+
+    int length = mystrlen(str1);
+    std::cout << "Length of str1: " << length << std::endl;
+
+    mystrcpy(buffer, str1);
+    std::cout << "Copied string: " << buffer << std::endl;
+
+    mystrcat(buffer, str2);
+    std::cout << "Concatenated string: " << buffer << std::endl;
+
+    char searchChar = 'o';
+    char* charPtr = mystrchr(buffer, searchChar);
+    if (charPtr != nullptr) {
+        std::cout << "Found character '" << searchChar << "' at position: " << (charPtr - buffer) << std::endl;
+    }
+    else {
+        std::cout << "Character not found." << std::endl;
+    }
+
+    char subStr[] = "ello";
+    char* subStrPtr = mystrstr(buffer, subStr);
+
+
+    if (subStrPtr != nullptr) {
+        std::cout << "Found substring at position: " << (subStrPtr - buffer) << std::endl;
+    }
+    else {
+        std::cout << "Substring not found." << std::endl;
+    }
+
+    return 0;
+}
